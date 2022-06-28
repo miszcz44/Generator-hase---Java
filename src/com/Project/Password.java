@@ -3,14 +3,18 @@ package com.Project;
 import java.util.Scanner;
 
 public class Password {
-    private int length;
+    private int numberOfCharactersLeft = 5;
     private int numberOfUppercaseLetters;
     private int numberOfLowercaseLetters;
     private int numberOfDigits;
     private int numberOfSpecialCharacters;
 
-    public void setLength(int length) {
-        this.length = length;
+    public int getNumberOfCharactersLeft() {
+        return numberOfCharactersLeft;
+    }
+
+    public void setNumberOfCharactersLeft(int numberOfCharactersLeft) {
+        this.numberOfCharactersLeft = numberOfCharactersLeft;
     }
 
     public void setNumberOfUppercaseLetters(int numberOfUppercaseLetters) {
@@ -29,18 +33,27 @@ public class Password {
         this.numberOfSpecialCharacters = numberOfSpecialCharacters;
     }
 
-    public int safeIntInputFromUser() {
-        int valueToStoreInteger = -1;
+    public int safeIntInputFromUser(int minimumValueOfCharactersNumber) {
         Scanner scanner = new Scanner(System.in);
-        while(true) {
+        int valueToStoreInteger = -1;
+        while (true) {
             try {
                 valueToStoreInteger = Integer.parseInt(scanner.next());
+                if(validateNumberOfCharacters(minimumValueOfCharactersNumber, valueToStoreInteger)){
+                    continue;
+                }
                 break;
             } catch (Exception e) {
-                System.out.println("Incorrect data. Try again.");
+                System.out.println("Niepoprawne dane. Spróbuj ponownie.");
                 continue;
             }
         }
         return valueToStoreInteger;
+    }
+
+
+
+    public boolean validateNumberOfCharacters(int minimumValueOfCharactersNumber, int valueToStoreInteger){
+       return true;
     }
 }
