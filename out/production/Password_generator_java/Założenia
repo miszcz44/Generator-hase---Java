@@ -1,0 +1,3 @@
+Użytkownik podaje liczbę znaków w haśle, po czym podaje kolejno liczbę dużych i małych liter, cyfr oraz znaków specjalnych.
+Program obsługuje błędy niepoprawnych danych wejściowych, użytkownik nie może ponadto chcieć wprowadzić więcej znaków niż na początku
+zadeklarował. Użytkownik może zapisać hasło do pliku pod wprowadzonym przez siebie kluczem.

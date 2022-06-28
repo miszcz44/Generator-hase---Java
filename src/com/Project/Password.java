@@ -1,5 +1,7 @@
 package com.Project;
 
+import java.util.Scanner;
+
 public class Password {
     private int length;
     private int numberOfUppercaseLetters;
@@ -25,5 +27,20 @@ public class Password {
 
     public void setNumberOfSpecialCharacters(int numberOfSpecialCharacters) {
         this.numberOfSpecialCharacters = numberOfSpecialCharacters;
+    }
+
+    public int safeIntInputFromUser() {
+        int valueToStoreInteger = -1;
+        Scanner scanner = new Scanner(System.in);
+        while(true) {
+            try {
+                valueToStoreInteger = Integer.parseInt(scanner.next());
+                break;
+            } catch (Exception e) {
+                System.out.println("Incorrect data. Try again.");
+                continue;
+            }
+        }
+        return valueToStoreInteger;
     }
 }
