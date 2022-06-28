@@ -3,11 +3,12 @@ package com.Project;
 import java.util.Scanner;
 
 public class Password {
-    private int numberOfCharactersLeft = 5;
+    private int numberOfCharactersLeft;
     private int numberOfUppercaseLetters;
     private int numberOfLowercaseLetters;
     private int numberOfDigits;
     private int numberOfSpecialCharacters;
+    private int numberOfCategoriesLeft =  4;
 
     public int getNumberOfCharactersLeft() {
         return numberOfCharactersLeft;
@@ -33,15 +34,16 @@ public class Password {
         this.numberOfSpecialCharacters = numberOfSpecialCharacters;
     }
 
-    public int safeIntInputFromUser(int minimumValueOfCharactersNumber) {
+    public void updateNumberOfCategoriesLeft(){
+        numberOfCategoriesLeft -= 1;
+    }
+
+    public int safeIntInputFromUser() {
         Scanner scanner = new Scanner(System.in);
         int valueToStoreInteger = -1;
         while (true) {
             try {
                 valueToStoreInteger = Integer.parseInt(scanner.next());
-                if(validateNumberOfCharacters(minimumValueOfCharactersNumber, valueToStoreInteger)){
-                    continue;
-                }
                 break;
             } catch (Exception e) {
                 System.out.println("Niepoprawne dane. Spróbuj ponownie.");
@@ -53,7 +55,24 @@ public class Password {
 
 
 
-    public boolean validateNumberOfCharacters(int minimumValueOfCharactersNumber, int valueToStoreInteger){
-       return true;
+    public int validateNumberOfCharacters(int minimumValueOfCharactersNumber, int valueToStoreInteger){
+        while(valueToStoreInteger < minimumValueOfCharactersNumber) {
+            valueToStoreInteger = askForCorrectInteger(minimumValueOfCharactersNumber, valueToStoreInteger);
+        }
+        return valueToStoreInteger;
+    }
+
+    public int askForCorrectInteger(int minimumValueOfCharactersNumber, int valueToStoreInteger){
+        System.out.println("Upewnij sie, że wprowadziłeś prawidłową liczbę znaków");
+        valueToStoreInteger = safeIntInputFromUser();
+        return valueToStoreInteger;
+    }
+
+    public int validateNumberOfCharacterForCharacterCategories(int minimumValueOfCharactersNumber, int valueToStoreInteger){
+        while(valueToStoreInteger < minimumValueOfCharactersNumber ||
+              valueToStoreInteger > this.numberOfCharactersLeft - this.numberOfCategoriesLeft){
+            valueToStoreInteger = askForCorrectInteger(minimumValueOfCharactersNumber, valueToStoreInteger);
+        }
+        return valueToStoreInteger;
     }
 }
