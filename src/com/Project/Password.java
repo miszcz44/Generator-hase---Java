@@ -79,4 +79,10 @@ public class Password {
         }
         return valueToStoreInteger;
     }
+
+    public void assignLeftCharactersToLowercase(){
+        this.numberOfLowercaseLetters += this.numberOfCharactersLeft;
+        this.numberOfCharactersLeft = 0;
+        System.out.println("Pozostałe znaki zostały przypisane do małych liter");
+    }
 }

@@ -44,5 +44,9 @@ public class Main {
         password.updateNumberOfCategoriesLeft();
         password.updateNumberOfCharactersLeft(numberOfSpecialCharacters);
 
+        if(password.getNumberOfCharactersLeft() > 0){
+            password.assignLeftCharactersToLowercase();
+        }
+
     }
 }
