@@ -1,6 +1,7 @@
 package com.Project;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,8 +12,8 @@ public class Password {
     private int numberOfDigits;
     private int numberOfSpecialCharacters;
     private int numberOfCategoriesLeft =  4;
-    private ArrayList<String> characters;
-    private Random random;
+    private ArrayList<String> characters = new ArrayList<>();
+    private Random random = new Random();
 
     public int getNumberOfCharactersLeft() {
         return numberOfCharactersLeft;
@@ -92,7 +93,13 @@ public class Password {
     }
 
     public void createThePassword(){
-
+        generateLowercaseLetters();
+        generateUppercaseLetters();
+        generateDigits();
+        generateSpecialCharacters();
+        Collections.shuffle(characters);
+        System.out.println("Twoje hasło:");
+        characters.forEach(System.out::printf);
     }
 
     public void generateLowercaseLetters(){
@@ -104,7 +111,7 @@ public class Password {
 
     public void generateUppercaseLetters(){
         for(int i = 0; i < this.numberOfUppercaseLetters; i++){
-            char randomUppercaseLetter = ((char)(random.nextInt(26) + 'a'));
+            char randomUppercaseLetter = ((char)(random.nextInt(26) + 'A'));
             turnRandomCharacterToStringAndAddToTheArray(randomUppercaseLetter);
         }
     }

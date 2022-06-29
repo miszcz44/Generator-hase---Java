@@ -51,6 +51,6 @@ public class Main {
         if(password.getNumberOfCharactersLeft() > 0){
             password.assignLeftCharactersToLowercase();
         }
-
+        password.createThePassword();
     }
 }
