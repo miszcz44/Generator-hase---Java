@@ -12,6 +12,7 @@ public class Main {
         numberOfCharacters = password.validateNumberOfCharacters(5, numberOfCharacters);
         password.setNumberOfCharactersLeft(numberOfCharacters);
 
+        password.printTheCurrentStateOfCharactersLeft();
         System.out.println("Podaj liczbę dużych liter w haśle");
         int numberOfUppercaseLetters = password.safeIntInputFromUser();
         numberOfUppercaseLetters = password.validateNumberOfCharacterForCharacterCategories(0,
@@ -20,6 +21,7 @@ public class Main {
         password.updateNumberOfCategoriesLeft();
         password.updateNumberOfCharactersLeft(numberOfUppercaseLetters);
 
+        password.printTheCurrentStateOfCharactersLeft();
         System.out.println("Podaj liczbę małych liter w haśle");
         int numberOfLowercaseLetters = password.safeIntInputFromUser();
         numberOfLowercaseLetters = password.validateNumberOfCharacterForCharacterCategories(0,
@@ -28,6 +30,7 @@ public class Main {
         password.updateNumberOfCategoriesLeft();
         password.updateNumberOfCharactersLeft(numberOfLowercaseLetters);
 
+        password.printTheCurrentStateOfCharactersLeft();
         System.out.println("Podaj liczbę cyfr w haśle");
         int numberOfDigits = password.safeIntInputFromUser();
         numberOfDigits = password.validateNumberOfCharacterForCharacterCategories(0,
@@ -36,6 +39,7 @@ public class Main {
         password.updateNumberOfCategoriesLeft();
         password.updateNumberOfCharactersLeft(numberOfDigits);
 
+        password.printTheCurrentStateOfCharactersLeft();
         System.out.println("Podaj liczbę znaków specjalnych w haśle");
         int numberOfSpecialCharacters = password.safeIntInputFromUser();
         numberOfSpecialCharacters = password.validateNumberOfCharacterForCharacterCategories(0,

@@ -1,5 +1,7 @@
 package com.Project;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Password {
@@ -9,6 +11,8 @@ public class Password {
     private int numberOfDigits;
     private int numberOfSpecialCharacters;
     private int numberOfCategoriesLeft =  4;
+    private ArrayList<String> characters;
+    private Random random;
 
     public int getNumberOfCharactersLeft() {
         return numberOfCharactersLeft;
@@ -56,10 +60,20 @@ public class Password {
         return valueToStoreInteger;
     }
 
-
+    public void printTheCurrentStateOfCharactersLeft(){
+        System.out.printf("Znakow do wykorzystania: %d\n", this.numberOfCharactersLeft);
+    }
 
     public int validateNumberOfCharacters(int minimumValueOfCharactersNumber, int valueToStoreInteger){
         while(valueToStoreInteger < minimumValueOfCharactersNumber) {
+            valueToStoreInteger = askForCorrectInteger();
+        }
+        return valueToStoreInteger;
+    }
+
+    public int validateNumberOfCharacterForCharacterCategories(int minimumValueOfCharactersNumber, int valueToStoreInteger){
+        while(valueToStoreInteger < minimumValueOfCharactersNumber ||
+        valueToStoreInteger > this.numberOfCharactersLeft - this.numberOfCategoriesLeft + 1){
             valueToStoreInteger = askForCorrectInteger();
         }
         return valueToStoreInteger;
@@ -71,18 +85,46 @@ public class Password {
         return valueToStoreInteger;
     }
 
-    public int validateNumberOfCharacterForCharacterCategories(int minimumValueOfCharactersNumber, int valueToStoreInteger){
-        while(valueToStoreInteger < minimumValueOfCharactersNumber ||
-              valueToStoreInteger > this.numberOfCharactersLeft - this.numberOfCategoriesLeft + 1){
-            System.out.println(valueToStoreInteger - this.numberOfCharactersLeft);
-            valueToStoreInteger = askForCorrectInteger();
-        }
-        return valueToStoreInteger;
-    }
-
     public void assignLeftCharactersToLowercase(){
         this.numberOfLowercaseLetters += this.numberOfCharactersLeft;
         this.numberOfCharactersLeft = 0;
         System.out.println("Pozostałe znaki zostały przypisane do małych liter");
+    }
+
+    public void createThePassword(){
+
+    }
+
+    public void generateLowercaseLetters(){
+        for(int i = 0; i < this.numberOfLowercaseLetters; i++){
+            char randomLowercaseLetter = ((char)(random.nextInt(26) + 'a'));
+            turnRandomCharacterToStringAndAddToTheArray(randomLowercaseLetter);
+        }
+    }
+
+    public void generateUppercaseLetters(){
+        for(int i = 0; i < this.numberOfUppercaseLetters; i++){
+            char randomUppercaseLetter = ((char)(random.nextInt(26) + 'a'));
+            turnRandomCharacterToStringAndAddToTheArray(randomUppercaseLetter);
+        }
+    }
+
+    public void generateDigits(){
+        for(int i = 0; i < this.numberOfDigits; i++){
+            char randomDigit = (char)(random.nextInt(10));
+            turnRandomCharacterToStringAndAddToTheArray(randomDigit);
+        }
+    }
+
+    public void generateSpecialCharacters(){
+        for(int i = 0; i < this.numberOfSpecialCharacters; i++){
+            char randomSpecialCharacter = (char)(random.nextInt(0xB4 - 21 + 1) + 21);
+            turnRandomCharacterToStringAndAddToTheArray(randomSpecialCharacter);
+        }
+    }
+
+    public void turnRandomCharacterToStringAndAddToTheArray(char randomCharacter){
+        String randomCharacterToStr = "" + randomCharacter;
+        characters.add(randomCharacterToStr);
     }
 }
