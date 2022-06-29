@@ -17,24 +17,32 @@ public class Main {
         numberOfUppercaseLetters = password.validateNumberOfCharacterForCharacterCategories(0,
                                                                                             numberOfUppercaseLetters);
         password.setNumberOfUppercaseLetters(numberOfUppercaseLetters);
+        password.updateNumberOfCategoriesLeft();
+        password.updateNumberOfCharactersLeft(numberOfUppercaseLetters);
 
         System.out.println("Podaj liczbę małych liter w haśle");
         int numberOfLowercaseLetters = password.safeIntInputFromUser();
         numberOfLowercaseLetters = password.validateNumberOfCharacterForCharacterCategories(0,
                                                                                             numberOfLowercaseLetters);
         password.setNumberOfLowercaseLetters(numberOfLowercaseLetters);
+        password.updateNumberOfCategoriesLeft();
+        password.updateNumberOfCharactersLeft(numberOfLowercaseLetters);
 
         System.out.println("Podaj liczbę cyfr w haśle");
         int numberOfDigits = password.safeIntInputFromUser();
         numberOfDigits = password.validateNumberOfCharacterForCharacterCategories(0,
                                                                                             numberOfDigits);
         password.setNumberOfDigits(numberOfDigits);
+        password.updateNumberOfCategoriesLeft();
+        password.updateNumberOfCharactersLeft(numberOfDigits);
 
         System.out.println("Podaj liczbę znaków specjalnych w haśle");
         int numberOfSpecialCharacters = password.safeIntInputFromUser();
         numberOfSpecialCharacters = password.validateNumberOfCharacterForCharacterCategories(0,
-                                                                                            numberOfUppercaseLetters);
+                                                                                            numberOfSpecialCharacters);
         password.setNumberOfSpecialCharacters(numberOfSpecialCharacters);
+        password.updateNumberOfCategoriesLeft();
+        password.updateNumberOfCharactersLeft(numberOfSpecialCharacters);
 
     }
 }

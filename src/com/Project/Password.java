@@ -38,6 +38,9 @@ public class Password {
         numberOfCategoriesLeft -= 1;
     }
 
+    public void updateNumberOfCharactersLeft(int usedCharacters){
+        this.numberOfCharactersLeft -= usedCharacters;
+    }
     public int safeIntInputFromUser() {
         Scanner scanner = new Scanner(System.in);
         int valueToStoreInteger = -1;
@@ -57,21 +60,22 @@ public class Password {
 
     public int validateNumberOfCharacters(int minimumValueOfCharactersNumber, int valueToStoreInteger){
         while(valueToStoreInteger < minimumValueOfCharactersNumber) {
-            valueToStoreInteger = askForCorrectInteger(minimumValueOfCharactersNumber, valueToStoreInteger);
+            valueToStoreInteger = askForCorrectInteger();
         }
         return valueToStoreInteger;
     }
 
-    public int askForCorrectInteger(int minimumValueOfCharactersNumber, int valueToStoreInteger){
+    public int askForCorrectInteger(){
         System.out.println("Upewnij sie, że wprowadziłeś prawidłową liczbę znaków");
-        valueToStoreInteger = safeIntInputFromUser();
+        int valueToStoreInteger = safeIntInputFromUser();
         return valueToStoreInteger;
     }
 
     public int validateNumberOfCharacterForCharacterCategories(int minimumValueOfCharactersNumber, int valueToStoreInteger){
         while(valueToStoreInteger < minimumValueOfCharactersNumber ||
-              valueToStoreInteger > this.numberOfCharactersLeft - this.numberOfCategoriesLeft){
-            valueToStoreInteger = askForCorrectInteger(minimumValueOfCharactersNumber, valueToStoreInteger);
+              valueToStoreInteger > this.numberOfCharactersLeft - this.numberOfCategoriesLeft + 1){
+            System.out.println(valueToStoreInteger - this.numberOfCharactersLeft);
+            valueToStoreInteger = askForCorrectInteger();
         }
         return valueToStoreInteger;
     }
