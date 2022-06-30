@@ -1,5 +1,9 @@
 package com.Project;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +18,9 @@ public class Password {
     private int numberOfSpecialCharacters;
     private int numberOfCategoriesLeft =  4;
     private ArrayList<String> characters = new ArrayList<>();
+    private String passwordContent = "" ;
     private Random random = new Random();
+    private File file = new File("Passwords.txt");
 
     public int getNumberOfCharactersLeft() {
         return numberOfCharactersLeft;
@@ -67,7 +73,7 @@ public class Password {
     }
 
     public int validateNumberOfCharacters(int minimumValueOfCharactersNumber, int valueToStoreInteger){
-        while(valueToStoreInteger < minimumValueOfCharactersNumber) {
+        while(valueToStoreInteger < minimumValueOfCharactersNumber || valueToStoreInteger > 50) {
             valueToStoreInteger = askForCorrectInteger();
         }
         return valueToStoreInteger;
@@ -75,7 +81,7 @@ public class Password {
 
     public int validateNumberOfCharacterForCharacterCategories(int minimumValueOfCharactersNumber, int valueToStoreInteger){
         while(valueToStoreInteger < minimumValueOfCharactersNumber ||
-        valueToStoreInteger > this.numberOfCharactersLeft - this.numberOfCategoriesLeft + 1){
+        valueToStoreInteger > this.numberOfCharactersLeft - this.numberOfCategoriesLeft + 1 || valueToStoreInteger > 50){
             valueToStoreInteger = askForCorrectInteger();
         }
         return valueToStoreInteger;
@@ -99,9 +105,18 @@ public class Password {
         generateDigits();
         generateSpecialCharacters();
         Collections.shuffle(characters);
+        assignPasswordContentToString();
         System.out.println("Twoje hasło:");
         characters.forEach(System.out::printf);
+        System.out.println("");
     }
+
+    public void assignPasswordContentToString(){
+        for(String character : characters){
+            this.passwordContent += character;
+        }
+    }
+
 
     public void generateLowercaseLetters(){
         for(int i = 0; i < this.numberOfLowercaseLetters; i++){
@@ -152,5 +167,14 @@ public class Password {
         System.out.println("Podaj klucz pod jakim zapisane będzie hasło");
         String KeyToStoreThePassword = scan.nextLine();
         return KeyToStoreThePassword;
+    }
+
+    public void addThePasswordToTheFile(String keyToStoreThePassword) throws IOException {
+        FileWriter fileWriter = new FileWriter(file, true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(keyToStoreThePassword + ": " + this.passwordContent);
+        bufferedWriter.newLine();
+        bufferedWriter.close();
+        fileWriter.close();
     }
 }

@@ -1,11 +1,12 @@
 package com.Project;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Password password = new Password();
 
         System.out.println("Podaj liczbę znaków w swoim haśle (conajmniej 5)");
@@ -57,6 +58,7 @@ public class Main {
         boolean userDecisionOfSavingThePassword = password.askIfUserWantsToSaveThePassword();
         if(userDecisionOfSavingThePassword == true){
             String keyToStoreThePassword = password.askForAKeyToStoreThePassword();
+            password.addThePasswordToTheFile(keyToStoreThePassword);
         }
     }
 }
