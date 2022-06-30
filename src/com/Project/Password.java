@@ -1,5 +1,6 @@
 package com.Project;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -133,5 +134,23 @@ public class Password {
     public void turnRandomCharacterToStringAndAddToTheArray(char randomCharacter){
         String randomCharacterToStr = "" + randomCharacter;
         characters.add(randomCharacterToStr);
+    }
+
+    public boolean askIfUserWantsToSaveThePassword(){
+        System.out.println("Czy chcesz zapisać hasło do pliku?");
+        System.out.println("1.Tak");
+        System.out.println("2.Nie");
+        int userChoice = safeIntInputFromUser();
+        if(userChoice == 1){
+            return true;
+        }
+        return false;
+    }
+
+    public String askForAKeyToStoreThePassword() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Podaj klucz pod jakim zapisane będzie hasło");
+        String KeyToStoreThePassword = scan.nextLine();
+        return KeyToStoreThePassword;
     }
 }

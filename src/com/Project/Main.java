@@ -1,5 +1,6 @@
 package com.Project;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
@@ -52,5 +53,10 @@ public class Main {
             password.assignLeftCharactersToLowercase();
         }
         password.createThePassword();
+
+        boolean userDecisionOfSavingThePassword = password.askIfUserWantsToSaveThePassword();
+        if(userDecisionOfSavingThePassword == true){
+            String keyToStoreThePassword = password.askForAKeyToStoreThePassword();
+        }
     }
 }
